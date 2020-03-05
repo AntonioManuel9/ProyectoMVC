@@ -30,17 +30,101 @@ class UserModel extends Model{
 
     }
 
-    function getUsuarioEmail($email){
-        $sql = "SELECT * FROM dbrally2.users WHERE email = :email LIMIT 1";
+    function insertRol ($user_id , $rol_id) {
+        try {
+            $insertSQL ="INSERT INTO dbrally2.roles_users VALUES (null, :user_id, :rol_id, null, null)";
+    
+                $pdo = $this->db->connect();
+                $pdoStmt = $pdo->prepare($insertSQL);
+    
+                $pdoStmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+                $pdoStmt->bindParam(':rol_id', $rol_id, PDO::PARAM_INT);
+                
+    
+                $pdoStmt->execute();
+    
+                return 'Registro Añadido Con Éxito';
+            } catch (PDOException $e) {
+                $error = 'Error al añadir registro: ' . $e->getMessage() . " en la línea: " . $e->getLine();
+                return [$error, 'danger'];
+            }
+    }
+
+
+
+    function getUsuario($id){
+        
+        $selectSQL = "SELECT * FROM dbrally2.users WHERE id = :id LIMIT 1";
         $pdo = $this->db->connect();
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':email', $email, PDO::PARAM_STR, 50);
+        $pdoStmt = $pdo->prepare($selectSQL);
+        $pdoStmt->bindParam(':id', $id, PDO::PARAM_STR, 50);
 
-        $stmt->execute();
+        $pdoStmt->execute();
 
-        $usuario = $stmt->fetch();
+        $usuario = $pdoStmt->fetch();
         return $usuario;
     }
+
+    function getUsuarioEmail($email){
+        $selectSQL = "SELECT * FROM dbrally2.users WHERE email = :email LIMIT 1";
+        $pdo = $this->db->connect();
+        $pdoStmt = $pdo->prepare($selectSQL);
+        $pdoStmt->bindParam(':email', $email, PDO::PARAM_STR, 50);
+
+        $pdoStmt->execute();
+
+        $usuario = $pdoStmt->fetch();
+        return $usuario;
+    }
+
+    function getRol($id){
+        $selectSQL = "SELECT roles_users.role_id, roles.name FROM dbrally2.roles_users INNER JOIN dbrally2.roles ON roles.id = roles_users.role_id WHERE roles_users.user_id = :id LIMIT 1";
+        $pdo = $this->db->connect();
+        $pdoStmt = $pdo->prepare($selectSQL);
+        $pdoStmt->bindParam(':id', $id, PDO::PARAM_INT);
+        
+        $pdoStmt->setFetchMode(PDO::FETCH_ASSOC);
+
+        $pdoStmt->execute();
+
+        $rol = $pdoStmt->fetch();
+        return $rol;
+    }
+
+    function updateEditPassword($id, $pass){
+        try{
+            $password_encriptado = password_hash($pass, CRYPT_BLOWFISH);
+            $updateSQL = "UPDATE dbrally2.users SET password = :pass WHERE id = :id";
+            $pdo = $this->db->connect();
+            $pdoStmt = $pdo->prepare($updateSQL);
+            $pdoStmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $pdoStmt->bindParam(':pass', $password_encriptado, PDO::PARAM_STR);
+            $pdoStmt->execute();
+            return ["Contraseña actualizada", "success"];
+        } catch (PDOException $e) {
+            $error = 'Error al actualizar contraseña: ' . $e->getMessage() . " en la línea: " . $e->getLine();
+            return [$error, 'danger'];
+        }
+
+    }
+
+    function updateEditUser($id, $name, $email){
+        try{
+            $updateSQL = "UPDATE dbrally2.users SET name = :name, email = :email WHERE id = :id";
+            $pdo = $this->db->connect();
+            $pdoStmt = $pdo->prepare($updateSQL);
+            $pdoStmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $pdoStmt->bindParam(':name', $name, PDO::PARAM_STR);
+            $pdoStmt->bindParam(':email', $email, PDO::PARAM_STR);
+            $pdoStmt->execute();
+            return ["Usuario actualizado", "success"];
+        } catch (PDOException $e) {
+            $error = 'Error al actualizar contraseña: ' . $e->getMessage() . " en la línea: " . $e->getLine();
+            return [$error, 'danger'];
+        }
+
+    }
+
 }
 
 ?>

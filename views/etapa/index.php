@@ -28,9 +28,6 @@
                                     <?php foreach ($this->cabecera as $key => $valor): ?>
                                     <th><?=$valor?></th>
                                     <?php endforeach;?>
-                                    <th>
-                                        Acciones
-                                    </th>
                                 </tr>
                             </thead>	
                             <tbody>
@@ -38,11 +35,6 @@
                                         <tr>
                                             <td><?=$value->id?></td>
                                             <td><?=$value->localizacion?></td>
-                                            <td>
-                                                <a href="#" title="Visualizar"><i class="material-icons">visibility</i></a>
-                                                <a href="#" title="Editar"><i class="material-icons">edit</i></a>
-                                                <a href="#" title="Eliminar"><i class="material-icons">clear</i></a>
-                                            </td>
                                         </tr>
                                     <?php endforeach;?>
                             </tbody>			

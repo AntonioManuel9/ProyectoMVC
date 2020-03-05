@@ -29,9 +29,11 @@
                                     <?php foreach ($this->cabecera as $key => $valor): ?>
                                     <th><?=$valor?></th>
                                     <?php endforeach;?>
-                                    <th>
-                                        Acciones
-                                    </th>
+                                    <?php if (isset($_SESSION['id'])):?>
+                                        <th>
+                                            Acciones
+                                        </th>
+                                    <?php endif;?>
                                 </tr>
                             </thead>	
                             <tbody>
@@ -43,9 +45,20 @@
                                             <td><?=$value->modelo?></td>
                                             <td><?=$value->cilindrada?></td>
                                             <td>
-                                                <a href="<?= URL ?>coche/show/<?=$value->id?>" title="Visualizar"><i class="material-icons">visibility</i></a>
-                                                <a href="<?= URL ?>coche/edit/<?=$value->id?>" title="Editar"><i class="material-icons">edit</i></a>
-                                                <a href="<?= URL ?>coche/delete/<?=$value->id?>" title="Eliminar"><i class="material-icons">clear</i></a>
+                                                <?php if (isset($_SESSION['id'])):?>
+                                                    <?php  if ($_SESSION['rol_name'] == "Registrado"):?>
+                                                        <a href="<?= URL ?>coche/show/<?=$value->id?>" title="Visualizar"><i class="material-icons">visibility</i></a>
+                                                    <?php endif;?>
+                                                    <?php  if ($_SESSION['rol_name'] == "Editor"):?>
+                                                        <a href="<?= URL ?>coche/edit/<?=$value->id?>" title="Editar"><i class="material-icons">edit</i></a>
+                                                        <a href="<?= URL ?>coche/show/<?=$value->id?>" title="Visualizar"><i class="material-icons">visibility</i></a>
+                                                    <?php endif;?>
+                                                    <?php  if ($_SESSION['rol_name'] == "Administrador"):?>
+                                                        <a href="<?= URL ?>coche/edit/<?=$value->id?>" title="Editar"><i class="material-icons">edit</i></a>
+                                                        <a href="<?= URL ?>coche/show/<?=$value->id?>" title="Visualizar"><i class="material-icons">visibility</i></a>
+                                                        <a href="<?= URL ?>coche/delete/<?=$value->id?>" title="Eliminar"><i class="material-icons">clear</i></a>
+                                                    <?php endif;?>
+                                                <?php endif;?>
                                             </td>
                                         </tr>
                                     <?php endforeach;?>
