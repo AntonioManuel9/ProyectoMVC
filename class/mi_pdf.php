@@ -3,14 +3,14 @@
         function Header(){
             $encabezado1 = "Gestión Rally";
             $encabezado2 = "Antonio Manuel Ramírez de la Rosa";
-            $this->SetFont('Courier', '', 10);
+            $this->SetFont('Times', '', 12);
             $this->Cell(90,10,utf8_decode($encabezado1),'B',0,'L');
             $this->Cell(90,10,utf8_decode($encabezado2),'B',1,'R');
         }
 
         function Footer(){
             $this->SetY(-10);
-            $this->SetFont('Courier', '', 10);
+            $this->SetFont('Times', '', 12);
 
             $this->Cell(0,10,utf8_decode('Página: ' . $this->PageNo()), 'T', 0, 'C');
 

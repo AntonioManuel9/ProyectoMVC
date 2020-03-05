@@ -57,7 +57,7 @@
 
             }
     
-            $pdf->Cell(45,10,utf8_decode('Numero de registros: '), 'T', 0);
+            $pdf->Cell(45,10,utf8_decode('Número de registros: '), 'T', 0);
             $pdf->Cell(45,10,utf8_decode($i+1), 'T', 0);
             $pdf->Cell(90,8,utf8_decode(''), 'T', 1, 'R');
     

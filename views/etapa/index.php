@@ -1,11 +1,3 @@
-<?php
-
-    require_once "models/etapaModel.php";
-	$nuevo = new EtapaModel();
-	$etapa = $nuevo->get();
-	$cabecera = $nuevo->cabeceraTabla();
-
-?>
 <!doctype html>
 <html lang="es"> 
 
@@ -29,12 +21,11 @@
 			<div class="card-body">
 			<section>
                     <article>
-                        <?php require_once("template/etapa/menubar.php")?>
                         <br>
                         <table class ="table">
                             <thead>
                                 <tr>
-                                    <?php foreach ($cabecera as $key => $valor): ?>
+                                    <?php foreach ($this->cabecera as $key => $valor): ?>
                                     <th><?=$valor?></th>
                                     <?php endforeach;?>
                                     <th>
@@ -43,7 +34,7 @@
                                 </tr>
                             </thead>	
                             <tbody>
-                                    <?php foreach ($etapa as $registro => $value):?>
+                                    <?php foreach ($this->datos as $registro => $value):?>
                                         <tr>
                                             <td><?=$value->id?></td>
                                             <td><?=$value->localizacion?></td>
@@ -56,7 +47,7 @@
                                     <?php endforeach;?>
                             </tbody>			
                         </table>
-                        <h5>El número de etapas es: <?= count($etapa);?></h4>
+                        <h5>El número de etapas es: <?= count($this->datos);?></h4>
                     </article>
                 </section>
 

@@ -33,7 +33,7 @@
       </li>
     </ul>
 
-      <button><a href="<?= URL ?>coche/imprimir_pdf"><i class="material-icons">picture_as_pdf</i></a></button>
+      <a href="<?= URL ?>coche/imprimir_pdf"><i class="material-icons">picture_as_pdf</i></a>
     &nbsp;
     &nbsp;
     <form class="form-inline my-2 my-lg-0">

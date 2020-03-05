@@ -1,11 +1,3 @@
-<?php
-
-    require_once "models/carreraModel.php";
-	$nuevo = new CarreraModel();
-	$carrera = $nuevo->get();
-	$cabecera = $nuevo->cabeceraTabla();
-
-?>
 <!doctype html>
 <html lang="es"> 
 
@@ -29,12 +21,11 @@
 			<div class="card-body">
 			<section>
                     <article>
-                        <?php require_once("template/carrera/menubar.php")?>
                         <br>
                         <table class ="table">
                             <thead>
                                 <tr>
-                                    <?php foreach ($cabecera as $key => $valor): ?>
+                                    <?php foreach ($this->cabecera as $key => $valor): ?>
                                     <th><?=$valor?></th>
                                     <?php endforeach;?>
                                     <th>
@@ -43,7 +34,7 @@
                                 </tr>
                             </thead>	
                             <tbody>
-                                    <?php foreach ($carrera as $registro => $value):?>
+                                    <?php foreach ($this->datos as $registro => $value):?>
                                         <tr>
                                             <td><?=$value->id?></td>
                                             <td><?=$value->nombreP?></td>
@@ -59,7 +50,7 @@
                                     <?php endforeach;?>
                             </tbody>			
                         </table>
-                        <h5>El número de carreras es: <?= count($carrera);?></h4>
+                        <h5>El número de carreras es: <?= count($this->datos);?></h4>
                     </article>
                 </section>
 
