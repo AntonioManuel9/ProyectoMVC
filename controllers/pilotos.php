@@ -11,6 +11,8 @@
 
         function render() {
 
+            session_start();
+
             $pilotos = $this->model->get();
             $this->view->datos = $pilotos;
             

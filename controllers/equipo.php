@@ -11,6 +11,8 @@
 
         function render() {
 
+            session_start();
+
             $equipo = $this->model->get();
             $this->view->datos = $equipo;
             

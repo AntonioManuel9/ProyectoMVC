@@ -11,6 +11,8 @@
 
         function render() {
 
+            session_start();
+
             $registro = $this->model->get();
             $this->view->datos = $registro;
             

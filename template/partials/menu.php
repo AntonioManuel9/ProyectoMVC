@@ -44,6 +44,32 @@
                 </a>
               </li>
             </ul>
+            <ul class="navbar-nav ml-auto">
+        <?php if (empty($_SESSION['id'])): ?>
+        <li class="nav-item">
+          <a class="nav-link" href="<?= URL ?>user">Inicia sesión
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?= URL ?>user/register">Regístrate</a>
+        </li>
+
+        <?php endif ?>
+
+        <?php if (!empty($_SESSION['id'])): ?>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <?= $_SESSION['name'] ?>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Editar Perfil</a>
+            <a class="dropdown-item" href="#">Cambiar Contraseña</a>
+            <a class="dropdown-item" href="<?= URL ?>user/logout">Logout</a>
+          </div>
+          <?php endif ?>
+      </ul>
 
         </div>
     </div>

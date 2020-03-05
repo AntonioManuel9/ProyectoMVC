@@ -11,6 +11,8 @@
 
         function render() {
 
+            session_start();
+
             $etapa = $this->model->get();
             $this->view->datos = $etapa;
             

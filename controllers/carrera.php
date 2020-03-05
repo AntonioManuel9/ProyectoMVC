@@ -11,6 +11,8 @@
 
         function render() {
 
+            session_start();
+
             $carrera = $this->model->get();
             $this->view->datos = $carrera;
             

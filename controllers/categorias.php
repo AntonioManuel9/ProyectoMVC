@@ -11,6 +11,8 @@
 
         function render() {
 
+            session_start();
+
             $this->view->render('categorias/index');
         }
     }

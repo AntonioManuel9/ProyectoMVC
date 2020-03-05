@@ -11,6 +11,8 @@
 
         function render() {
 
+            session_start();
+
             $coche = $this->model->get();
             $this->view->datos = $coche;
             $this->view->cabecera = $this->model->cabeceraTabla();
