@@ -30,6 +30,5 @@
     <!-- botones acción -->
     <hr>
     <a href="<?= URL ?>coche" class="btn btn-secondary" role="button" aria-pressed="true">Cancelar</a>
-    <button><i class="material-icons">picture_as_pdf</i></button>
     
 </form>

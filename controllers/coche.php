@@ -1,5 +1,8 @@
 <?php
 
+    require_once('fpdf/fpdf.php');
+    require_once('class/mi_pdf.php');
+    
     class Coche Extends Controller {
 
         function __construct() {
@@ -28,6 +31,39 @@
           
             $this->view->render('coche/create/index');
 
+        }
+
+        public function imprimir_pdf(){
+            $pdf = new mi_pdf();
+            $pdf->Addpage();
+            $pdf->SetFont('Courier', '', 10);
+    
+            $pdf-> Cabecera_archivos();
+    
+            $archivos = $this->model->get();
+            $total_capacidad = 0;
+    
+            foreach( $archivos as $i => $archivo){
+    
+                $pdf->Cell(10,8,utf8_decode($archivo->id),0,0);
+    
+                $pdf->Cell(20,8,utf8_decode($archivo->marca),0,0);
+    
+                $pdf->Cell(60,8,utf8_decode($archivo->modelo),0,0);
+
+                $pdf->Cell(50,8,utf8_decode($archivo->nombreEquipo),0,0);
+
+                $pdf->Cell(40,8,utf8_decode($archivo->cilindrada),0,1);
+
+            }
+    
+            $pdf->Cell(45,10,utf8_decode('Numero de registros: '), 'T', 0);
+            $pdf->Cell(45,10,utf8_decode($i+1), 'T', 0);
+            $pdf->Cell(90,8,utf8_decode(''), 'T', 1, 'R');
+    
+            $pdf->Output('I', 'coche.pdf');
+            
+            
         }
 
         function edit($param) {

@@ -31,6 +31,5 @@
     <hr>
     <a href="<?= URL ?>coche" class="btn btn-secondary" role="button" aria-pressed="true">Cancelar</a>
     <button type="submit" class="btn btn-primary" >Actualizar</button>
-    <button><i class="material-icons">picture_as_pdf</i></button>
     
 </form>

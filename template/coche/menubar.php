@@ -32,6 +32,10 @@
         </div>
       </li>
     </ul>
+
+      <button><a href="<?= URL ?>coche/imprimir_pdf"><i class="material-icons">picture_as_pdf</i></a></button>
+    &nbsp;
+    &nbsp;
     <form class="form-inline my-2 my-lg-0">
       <input name="expresion" class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
       <button class="btn btn-light my-2 my-sm-0" formaction="buscar.php" type="submit">Buscar</button>
