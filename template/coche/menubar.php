@@ -11,11 +11,13 @@
       </li>
       
       <!-- Capa Gestión perfiles -->
-     
-        <li class="nav-item">
-          <a class="nav-link" href="<?= URL ?>coche/create">Crear</a>
-        </li>
-      
+      <?php if (isset($_SESSION['id'])):?>
+        <?php if ($_SESSION['rol_name'] != 'Registrado'):?>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= URL ?>coche/create">Crear</a>
+          </li>
+        <?php endif;?>
+      <?php endif;?>
      
       <!-- Fin capa gestión de perfiles -->
       
@@ -24,11 +26,11 @@
           Ordenar
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="ordenar.php?criterio=nombre">id</a>
-          <a class="dropdown-item" href="ordenar.php?criterio=apellidos">Equipo</a>
-          <a class="dropdown-item" href="ordenar.php?criterio=ciudad">Marca</a>
-          <a class="dropdown-item" href="ordenar.php?criterio=email">Modelo</a>
-          <a class="dropdown-item" href="ordenar.php?criterio=edad">Cilindrada</a>
+        <a class="dropdown-item" href="<?= URL ?>coche/ordenar/id">id</a>
+          <a class="dropdown-item" href="<?= URL ?>coche/ordenar/nombreE">Equipo</a>
+          <a class="dropdown-item" href="<?= URL ?>coche/ordenar/marca">Marca</a>
+          <a class="dropdown-item" href="<?= URL ?>coche/ordenar/modelo">Modelo</a>
+          <a class="dropdown-item" href="<?= URL ?>coche/ordenar/cilindrada">Cilindrada</a>
         </div>
       </li>
     </ul>
@@ -38,7 +40,7 @@
     &nbsp;
     <form class="form-inline my-2 my-lg-0">
       <input name="expresion" class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
-      <button class="btn btn-light my-2 my-sm-0" formaction="buscar.php" type="submit">Buscar</button>
+      <button class="btn btn-light my-2 my-sm-0" formaction="<?= URL ?>coche/buscar" type="submit">Buscar</button>
     </form>
   </div>
 </nav>

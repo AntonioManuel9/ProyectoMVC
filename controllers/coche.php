@@ -243,6 +243,31 @@
             } 
         }
 
+        public function ordenar($param = null){
+            if (!isset($_SESSION)){
+                session_start();
+            }
+            $coche = $this->model->order($param);
+            // var_dump($this->model->order($param));
+            // exit(0);
+            $this->view->datos = $coche;
+            $this->view->cabecera = $this->model->cabeceraTabla();
+            
+            $this->view->render('coche/index');
+        }
+
+        public function buscar($param = null){
+            if (!isset($_SESSION)){
+                session_start();
+            }
+            $param = $_GET['expresion'];
+            $coche = $this->model->buscar($param);
+            $this->view->cabecera = $this->model->cabeceraTabla();
+            $this->view->datos = $coche;
+            
+            $this->view->render('coche/index');
+        }
+
         function delete($param) {
             $this->model->delete($param[0]);
             

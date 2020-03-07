@@ -170,5 +170,52 @@
             return $cabecera;
         }
 
+        public function order($param){
+            $campo = $param[0];
+            try {
+                $consultaSQL = "SELECT c.id, c.marca, c.modelo, e.nombreE nombreEquipo, c.cilindrada 
+                FROM dbrally2.coches c INNER JOIN dbrally2.equipo e ON c.equipo_id = e.id ORDER BY $campo ASC";
+    
+                $pdo = $this->db->connect();
+                $pdoStmt = $pdo->prepare($consultaSQL);
+    
+                $pdoStmt->setFetchMode(PDO::FETCH_OBJ);
+    
+                $pdoStmt->execute();
+    
+                $coche = $pdoStmt->fetchAll();
+    
+                return $coche;
+
+            } catch (PDOException $e) {
+                $error = "Error al leer registros: " . $e->getMessage() .  " en la línea " . $e->getLine();
+            }
+        }
+    
+        public function buscar($param){
+            $campo = $param;
+            try {
+                $consultaSQL = "SELECT c.id, c.marca, c.modelo, e.nombreE nombreEquipo, c.cilindrada 
+                FROM dbrally2.coches c INNER JOIN dbrally2.equipo e ON c.equipo_id = e.id
+                WHERE e.nombreE LIKE '%$campo%' OR
+                c.marca LIKE '%$campo%' OR
+                c.modelo LIKE '%$campo%' OR
+                c.cilindrada LIKE '%$campo%'";
+    
+                $pdo = $this->db->connect();
+                $pdoStmt = $pdo->prepare($consultaSQL);
+    
+                $pdoStmt->setFetchMode(PDO::FETCH_OBJ);
+    
+                $pdoStmt->execute();
+    
+                $coche = $pdoStmt->fetchAll();
+    
+                return $coche;
+            } catch (PDOException $e) {
+                $error = "Error al leer registros: " . $e->getMessage() .  " en la línea " . $e->getLine();
+            }
+        }
+
     }
 ?>  

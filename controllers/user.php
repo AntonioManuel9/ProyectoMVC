@@ -76,7 +76,7 @@
             }
         }
 
-        function validate_editPassword($param = null){
+        function validar_editPassword($param = null){
             session_start();
             if (isset($_SESSION['id'])){
                 $pass_antigua = filter_var($_POST['password_antigua'], FILTER_SANITIZE_STRING);
@@ -111,25 +111,18 @@
                     # Datos no validados
                     $this->view->errores = $errores;
                     $this->view->mensaje = ["Errores en el formulario.", 'danger'];
-                    // $this->view->user = $user;
-                    // var_dump($errores);
-                    // exit(0);
                     $this->view->render('user/editPassword/index');
     
                     
                 } else {
     
-                    # La función insert devuelve el mensaje resultante de añadir el registro
-                    // $mensaje=$this->model->insert($user);
-                    $mensaje = $this->model->updatePass($_SESSION['id'], $pass1);
-                    // $mensaje = ["No errores", "success"];
+                    $mensaje = $this->model->updateEditPassword($_SESSION['id'], $pass1);
                     $this->view->mensaje = $mensaje;
     
                     $this->view->render('user/editPassword/index');
                     
                 } 
-    
-                // $this->view->render('user/changepass/index');
+
             }
             
         }
@@ -251,13 +244,21 @@
         }
 
         function logout(){
-            session_start();
+            if (!isset($_SESSION)){
+                session_start();
+            }
             setcookie("PHPSESSID", "", time() - 3600, "/");
             unset($_SESSION);
             session_unset();
             session_destroy();
             $this->view->render('user/login/index');
 
+        }
+
+        function eliminarPerfil() {
+            session_start();
+            $this->model->eliminarPerfil($_SESSION['id']);
+            $this->logout();
         }
 
 

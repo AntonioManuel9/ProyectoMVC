@@ -125,6 +125,27 @@ class UserModel extends Model{
 
     }
 
+    public function eliminarPerfil($id){
+        try {
+        
+            $deleteSQL ="DELETE FROM dbrally2.users WHERE id = $id";
+
+            $pdo = $this->db->connect();
+            $stmt = $pdo->prepare($deleteSQL);
+
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    
+            $stmt->execute();
+
+            return ["Usuario eliminado", "success"];
+                
+        } catch (PDOException $e) {
+        
+            $error = 'Error al borrar registro: ' . $e->getMessage() . " en la línea: " . $e->getLine();
+            return $error;
+        }
+    }
+
 }
 
 ?>
