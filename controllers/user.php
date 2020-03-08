@@ -258,6 +258,7 @@
         function eliminarPerfil() {
             session_start();
             $this->model->eliminarPerfil($_SESSION['id']);
+            $this->view->mensaje = "Perfil eliminado correctamente";
             $this->logout();
         }
 

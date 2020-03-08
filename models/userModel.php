@@ -100,7 +100,7 @@ class UserModel extends Model{
             $pdoStmt->bindParam(':id', $id, PDO::PARAM_INT);
             $pdoStmt->bindParam(':pass', $password_encriptado, PDO::PARAM_STR);
             $pdoStmt->execute();
-            return ["Contraseña actualizada", "success"];
+            return 'Contraseña actualizada';
         } catch (PDOException $e) {
             $error = 'Error al actualizar contraseña: ' . $e->getMessage() . " en la línea: " . $e->getLine();
             return [$error, 'danger'];
@@ -117,7 +117,7 @@ class UserModel extends Model{
             $pdoStmt->bindParam(':name', $name, PDO::PARAM_STR);
             $pdoStmt->bindParam(':email', $email, PDO::PARAM_STR);
             $pdoStmt->execute();
-            return ["Usuario actualizado", "success"];
+            return 'Usuario actualizado';
         } catch (PDOException $e) {
             $error = 'Error al actualizar contraseña: ' . $e->getMessage() . " en la línea: " . $e->getLine();
             return [$error, 'danger'];
@@ -137,7 +137,7 @@ class UserModel extends Model{
     
             $stmt->execute();
 
-            return ["Usuario eliminado", "success"];
+            return 'Usuario eliminado';
                 
         } catch (PDOException $e) {
         
